@@ -24,3 +24,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Nascondi scrollbar per Chrome, Safari e Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Nascondi scrollbar per IE, Edge e Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
