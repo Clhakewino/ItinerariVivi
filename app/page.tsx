@@ -3,10 +3,10 @@ import Link from "next/link"; // Fondamentale per far funzionare il tag <Link>
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-slate-900 text-white">
+    <div>
       {/* Background Image Layer */}
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center">
-        <div className="absolute inset-0 bg-black/5" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Content Layer */}
