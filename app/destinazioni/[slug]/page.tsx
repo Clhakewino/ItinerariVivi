@@ -25,6 +25,12 @@ export default async function CityPage({ params }: { params: { slug: string } })
 
   const { slug } = await params;
 
+  const city = ITINERARI_FULL.find((item) => item.slug.toLowerCase() === slug.toLowerCase());
+
+  if (!city) {
+    notFound();
+  }
+
   // Structured data JSON-LD
   const structuredData = {
     "@context": "https://schema.org",
@@ -34,12 +40,6 @@ export default async function CityPage({ params }: { params: { slug: string } })
     "image": city.immagine,
     "url": `https://itinerari-vivi.vercel.app/destinazioni/${city.slug}`,
   };
-
-  const city = ITINERARI_FULL.find((item) => item.slug.toLowerCase() === slug.toLowerCase());
-
-  if (!city) {
-    notFound();
-  }
 
   return (
     <section>
