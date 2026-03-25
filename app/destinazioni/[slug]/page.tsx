@@ -1,5 +1,27 @@
-import { ITINERARI_FULL } from '../../data/itinerari';
+import { ITINERARI_FULL } from "../../data/itinerari";
 import { notFound } from 'next/navigation';
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
+
+  const city = ITINERARI_FULL.find(
+    (item) => item.slug.toLowerCase() === slug.toLowerCase()
+  );
+
+  if (!city) {
+    return {
+      title: "Città non trovata",
+    };
+  }
+
+  return {
+    title: `${city.slug}`,
+    description: `Itinerario ${city.slug}`,
+    openGraph: {
+      images: [city.immagine],
+    },
+  };
+}
 
 export default async function CityPage({ params }: { params: { slug: string } }) {
 
