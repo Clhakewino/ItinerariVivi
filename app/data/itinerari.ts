@@ -11,7 +11,7 @@ interface Itinerario {
   durata: string;
   difficolta: string;
   immagine: string;
-  contenuto: [string];
+  contenuto: string[];
   pointsOfInterest: PointOfInterest[];
 }
 
