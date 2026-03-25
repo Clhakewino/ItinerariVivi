@@ -65,7 +65,7 @@ export default function HomePage() {
                   <span className="text-xs font-bold uppercase text-rose-500">{trip.difficolta}</span>
                   <span className="text-xs text-slate-400">{trip.durata}</span>
                 </div>
-                <h3 className="text-xl font-bold">{trip.titolo}</h3>
+                <h3 className="text-xl font-bold capitalize">{trip.slug} - {trip.titolo}</h3>
                 <Link
                   href={`/destinazioni/${trip.slug}`}
                   className="mt-4 block w-full py-2 border border-slate-200 rounded-lg text-sm font-semibold text-center hover:bg-slate-900 hover:text-white transition"
