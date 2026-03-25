@@ -39,7 +39,7 @@ export default function HomePage() {
       </div>
 
       {/* MAIN CONTENT */}
-      <main className="max-w-7xl mx-auto px-8 pt-20 pb-12 md:pt-20">
+      <main className="max-w-7xl mx-auto px-8 pt-12 pb-12 md:pt-20">
         <header className="mb-12">
           <h2 className="text-4xl font-bold">I nostri itinerari</h2>
           <p className="text-slate-500 mt-2">Alcuni percorsi selezionati per la tua prossima avventura.</p>

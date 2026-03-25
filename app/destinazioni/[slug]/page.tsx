@@ -9,10 +9,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   );
 
   if (!city) {
-    return {
-      title: "Città non trovata",
-    };
+      notFound();
   }
+
+  // Structured data JSON-LD
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    "name": `Itinerario a ${city.name}`,
+    "description": `Scopri itinerari a ${city.name}, dai luoghi culturali ai posti più nascosti.`,
+    "url": `https://itinerari-vivi.vercel.app/destinazioni/${city.slug}`,
+  };
 
   return {
     title: `${city.slug}`,

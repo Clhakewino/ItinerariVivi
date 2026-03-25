@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://itinerari-vivi.vercel.app/sitemap.xml
