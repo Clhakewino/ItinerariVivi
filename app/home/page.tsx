@@ -6,6 +6,38 @@ import { ITINERARI_FULL } from '../data/itinerari';
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
+
+      {/* SEZIONE SFONDO FISSO */}
+      <div
+        className="relative w-full h-[300px] bg-cover bg-center flex items-center justify-center"
+        style={{ backgroundImage: "url('/assets/homeImage.jpg')" }}
+      >
+        {/* Overlay per rendere il testo leggibile */}
+        <div className="absolute inset-0 bg-black/30" />
+
+        {/* Testo sopra lo sfondo */}
+        <div className="relative z-10 text-center text-white">
+          <h1 className="text-5xl font-black uppercase tracking-widest drop-shadow-[2px_2px_1.5px_rgba(0,0,0,0.4)]">Esplora</h1>
+          <p className="text-lg opacity-90 drop-shadow-[2px_2px_1.5px_rgba(0,0,0,0.4)]">I migliori itinerari per il tuo viaggio</p>
+        </div>
+      </div>
+
+      <div className="relative z-20 max-w-2xl mx-auto px-8 -mt-8">
+        <div className="bg-white rounded-full shadow-xl flex items-center p-2 border border-slate-100">
+          <input
+            type="text"
+            placeholder="Cerca la tua prossima meta..."
+            className="flex-grow bg-transparent px-6 py-3 outline-none text-slate-600 placeholder:text-slate-400"
+          />
+          <button className="bg-rose-500 text-white p-3 rounded-full hover:bg-rose-600 transition shadow-md">
+            {/* Icona Lente (SVG semplice) */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
       {/* MAIN CONTENT */}
       <main className="max-w-7xl mx-auto px-8 pt-20 pb-12 md:pt-20">
         <header className="mb-12">
@@ -45,7 +77,6 @@ export default function HomePage() {
           ))}
         </div>
       </main>
-
     </div>
   );
 }
