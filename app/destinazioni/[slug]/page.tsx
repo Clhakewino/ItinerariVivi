@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
-    "name": `Itinerario a ${city.name}`,
-    "description": `Scopri itinerari a ${city.name}, dai luoghi culturali ai posti più nascosti.`,
+    "name": `Itinerario a ${city.slug}`,
+    "description": `Scopri itinerari a ${city.slug}, dai luoghi culturali ai posti più nascosti.`,
     "url": `https://itinerari-vivi.vercel.app/destinazioni/${city.slug}`,
   };
 
