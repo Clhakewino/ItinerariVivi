@@ -145,7 +145,7 @@ export const ITINERARI_FULL: Itinerario[] = [
     titolo: "L'Anima Mediterranea",
     durata: "4 giorni",
     difficolta: "Facile",
-    immagine: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=1600&auto=format&fit=crop",
+    immagine: "https://images.unsplash.com/photo-1583422409516-2895a77efded?q=80&w=1600&auto=format&fit=crop",
     contenuto: "Barcellona è una città che danza tra il passato medievale del Barrio Gótico e le visioni oniriche di Antoni Gaudí. È una metropoli vibrante dove la creatività esplode in ogni facciata di mosaico e in ogni mercato affollato come la Boqueria.<br />Dalle spiagge dorate della Barceloneta alle vette del Tibidabo, la capitale catalana offre un mix perfetto di relax balneare, eccellenza gastronomica e un patrimonio artistico unico al mondo che la rende indimenticabile.",
     pointsOfInterest: [
       {
@@ -176,7 +176,7 @@ export const ITINERARI_FULL: Itinerario[] = [
     titolo: "Il Cuore Spirituale del Giappone",
     durata: "5 giorni",
     difficolta: "Media",
-    immagine: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=1600&auto=format&fit=crop",
+    immagine: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1600&auto=format&fit=crop",
     contenuto: "\"<em>A Kyoto, il tempo non scorre, ma respira tra le pareti di carta e i giardini di pietra.</em>\"<br /><br />Con oltre duemila templi e santuari, Kyoto è il custode millenario delle arti classiche giapponesi. Dalla cerimonia del tè alle silenziose strade di Gion dove camminano le Geisha, ogni angolo di questa città è un invito alla contemplazione e alla bellezza sobria (Wabi-sabi).",
     pointsOfInterest: [
       {
@@ -207,7 +207,7 @@ export const ITINERARI_FULL: Itinerario[] = [
     titolo: "Il Centro del Mondo",
     durata: "4 giorni",
     difficolta: "Facile",
-    immagine: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1600&auto=format&fit=crop",
+    immagine: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1600&auto=format&fit=crop",
     contenuto: "New York City è un'esplosione di energia, cultura e ambizione. Divisa in cinque distretti, Manhattan ne rappresenta il cuore pulsante, dove ogni strada sembra il set di un film famoso.<br />Dallo skyline mozzafiato dominato dall'Empire State Building alla quiete inaspettata di Central Park, NYC offre un'esperienza sensoriale totale, tra i suoni dei taxi, le luci di Broadway e i profumi delle cucine di tutto il mondo.",
     pointsOfInterest: [
       {
