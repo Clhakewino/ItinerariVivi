@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: `${city.slug}`,
-    description: `Itinerario ${city.slug}`,
+    title: `${city.slug.toUpperCase()}`,
+    description: `Itinerario ${city.slug.charAt(0).toUpperCase()}${city.slug.slice(1).toLowerCase()}}`,
     openGraph: {
       images: [city.immagine],
     },
