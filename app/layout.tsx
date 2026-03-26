@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 // 1. Importa il componente (assumendo che lo crei in components/Navbar.tsx)
-import Navbar from "./components/Navbar"; 
+import Navbar from "./components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ItinerariVivi - Esplora il Mondo",
   description: "Trova il tuo prossimo viaggio indimenticabile",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
