@@ -17,11 +17,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${city.slug.toUpperCase()}`,
     description: `Itinerario ${city.slug.charAt(0).toUpperCase()}${city.slug.slice(1).toLowerCase()}`,
     openGraph: {
-      url: `https://itinerari-vivi.vercel.app/destinazioni/${city.slug}`,
-      siteName: "ItinerariVivi",
       images: [city.immagine],
-      locale: "it_IT",
-      type: "article",
     },
     icons: {
       icon: "/favicon.ico", // Assicurati che il file sia in public/
