@@ -17,6 +17,28 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ItinerariVivi - Esplora il Mondo",
   description: "Trova il tuo prossimo viaggio indimenticabile",
+  // SOCIAL
+  openGraph: {
+    title: "ItinerariVivi - Esplora il Mondo",
+    description: "Trova il tuo prossimo viaggio indimenticabile",
+    url: "https://itinerari-vivi.vercel.app/",
+    siteName: "ItinerariVivi",
+    images: [
+      {
+        url: "https://itinerari-vivi.vercel.app/og-image.jpg", // Percorso dell'immagine
+        width: 1200,
+        height: 630,
+        alt: "Anteprima ItinerariVivi",
+      },
+    ],
+    locale: "it_IT",
+    type: "website",
+  },
+  // Aggiungi questo blocco per le icone (Favicon)
+  icons: {
+    icon: "/favicon.ico", // Assicurati che il file sia in public/
+    apple: "/favicon.png", // Opzionale, per dispositivi Apple
+  },
 };
 
 export default function RootLayout({
