@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
+import Link from 'next/link';
+
 import { ITINERARI_FULL, Itinerario } from './data/itinerari';
 
 import CarouselTrips from './components/CarouselTrips';
