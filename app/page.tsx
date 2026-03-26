@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import "./globals.css";
-import { ITINERARI_FULL } from './data/itinerari';
+import { ITINERARI_FULL, Itinerario } from './data/itinerari';
 
 export default function HomePage() {
   // Definiamo lo stato per il termine di ricerca
@@ -23,7 +23,7 @@ export default function HomePage() {
 
     const citiesToShowInFirstCarousel = [...ITINERARI_FULL].filter(trip => trip.homeCarousel.includes(1))
 
-  const [randomTrips, setRandomTrips] = useState([]);
+  const [randomTrips, setRandomTrips] = useState<Itinerario[]>([]);
 
   useEffect(() => {
     // Questa logica viene eseguita SOLO sul client dopo il primo caricamento

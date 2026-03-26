@@ -4,7 +4,7 @@ interface PointOfInterest {
   descrizione: string;
 }
 
-interface Itinerario {
+export interface Itinerario {
   id: number;
   homeCarousel: number[];
   slug: string;
