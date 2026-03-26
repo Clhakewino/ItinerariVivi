@@ -13,7 +13,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       // Logica: Mostra se non siamo in home OPPURE se abbiamo scrollato più di 100px
-      if (pathname !== '/' || window.scrollY > 100) {
+      if (pathname !== '/' || window.scrollY > 250) {
         setShowSearch(true);
       } else {
         setShowSearch(false);
