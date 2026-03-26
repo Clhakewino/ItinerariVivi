@@ -1,9 +1,26 @@
+'use client'; // Necessario per usare gli hook in Next.js (App Router)
+
+import { useState } from 'react';
+
 import Link from 'next/link';
 
 import "./globals.css";
 import { ITINERARI_FULL } from './data/itinerari';
 
 export default function HomePage() {
+  // Definiamo lo stato per il termine di ricerca
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filtriamo gli itinerari in base al termine inserito
+  // Filtra per titolo o slug (puoi aggiungere altri campi se necessario)
+  const searchResults = searchTerm.length > 1
+    ? ITINERARI_FULL.filter((trip) => {
+      const searchLower = searchTerm.toLowerCase();
+      return (
+        trip.titolo.toLowerCase().includes(searchLower) ||
+        trip.slug.toLowerCase().includes(searchLower))
+    }) : [];
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
 
@@ -22,12 +39,15 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* SEARCH BAR */}
       <div className="relative z-20 max-w-2xl mx-auto px-8 -mt-8">
         <div className="bg-white rounded-full shadow-xl flex items-center p-2 border border-slate-100">
           <input
             type="text"
             placeholder="Cerca la tua prossima meta..."
             className="flex-grow bg-transparent px-6 py-3 outline-none text-slate-600 placeholder:text-slate-400"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button className="bg-rose-500 text-white p-3 rounded-full hover:bg-rose-600 transition shadow-md">
             {/* Icona Lente (SVG semplice) */}
@@ -36,10 +56,56 @@ export default function HomePage() {
             </svg>
           </button>
         </div>
+
+        {/* MESSAGGIO SE NON CI SONO RISULTATI */}
+        {searchResults.length === 0 && searchTerm.length > 2 && (
+          <div className="text-center pt-8 text-slate-400">
+            Nessun itinerario trovato per la tua ricerca.
+          </div>
+        )}
+
       </div>
 
       {/* MAIN CONTENT */}
-      <main className="max-w-7xl mx-auto px-8 pt-12 pb-12 md:pt-20">
+      <main className="max-w-7xl mx-auto px-8 pt-8 pb-12 md:pt-20">
+
+        {/*RISULTATI DI RICERCA (Appare solo se scrivi)*/}
+        {searchTerm.length > 1 && (
+          <section className="mb-4 animate-in fade-in slide-in-from-top-4 duration-500">
+            <h2 className="text-2xl font-bold mb-4 text-rose-500">
+              Risultati per: "{searchTerm}"
+            </h2>
+
+            {searchResults.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {searchResults.map((trip) => (
+                  <Link
+                    key={`search-${trip.id}`}
+                    href={`/destinazioni/${trip.slug}`}
+                    className="flex items-center gap-4 bg-white p-0 rounded-xl shadow-sm hover:shadow-md transition border border-slate-100"
+                  >
+                    <div
+                      className="w-20 h-20 rounded-lg bg-cover bg-center"
+                      style={{
+                        backgroundImage: `url(${trip.immagine})`,
+                        backgroundSize: '220%' // zoom immagine
+                      }}
+                    />
+                    <div>
+                      <h4 className="font-bold text-slate-800 leading-tight capitalize">{trip.slug}</h4>
+                      <span className="text-sm">{trip.titolo}</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="text-slate-400 italic">Nessun itinerario trovato...</p>
+            )}
+            <hr className="mt-12 border-slate-200" />
+          </section>
+        )}
+
+        {/* CAROSELLO */}
         <header className="mb-12">
           <h2 className="text-4xl font-bold">I nostri itinerari</h2>
           <p className="text-slate-500 mt-2">Alcuni percorsi selezionati per la tua prossima avventura.</p>
@@ -65,7 +131,7 @@ export default function HomePage() {
                   <span className="text-xs font-bold uppercase text-rose-500">{trip.difficolta}</span>
                   <span className="text-xs text-slate-400">{trip.durata}</span>
                 </div>
-                <h3 className="text-xl font-bold capitalize">{trip.slug} - {trip.titolo}</h3>
+                <h3 className="text-xl font-bold first-letter:uppercase">{trip.slug} - {trip.titolo}</h3>
                 <Link
                   href={`/destinazioni/${trip.slug}`}
                   className="mt-4 block w-full py-2 border border-slate-200 rounded-lg text-sm font-semibold text-center hover:bg-slate-900 hover:text-white transition"

@@ -101,7 +101,7 @@ export const ITINERARI_FULL: Itinerario[] = [
   {
     id: 3,
     slug: "parigi",
-    titolo: "Parigi - Ville Lumière",
+    titolo: "Ville Lumière",
     durata: "4 giorni",
     difficolta: "Facile",
     immagine: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1600&auto=format&fit=crop",
