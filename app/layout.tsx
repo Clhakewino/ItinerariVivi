@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "ItinerariVivi",
     images: [
       {
-        url: "https://itinerari-vivi.vercel.app/opengraph-image.jpg", // Percorso dell'immagine
+        url: "/opengraph-image.jpg", // Percorso dell'immagine
         width: 1200,
         height: 630,
         alt: "Anteprima ItinerariVivi",
