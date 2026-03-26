@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       siteName: "ItinerariVivi",
       images: [city.immagine],
       locale: "it_IT",
-      type: "website",
+      type: "article",
     },
     icons: {
       icon: "/favicon.ico", // Assicurati che il file sia in public/
