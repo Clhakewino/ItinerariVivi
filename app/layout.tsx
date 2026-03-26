@@ -15,8 +15,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://itinerari-vivi.vercel.app"),
   title: "ItinerariVivi - Esplora il Mondo",
   description: "Trova il tuo prossimo viaggio indimenticabile",
+
+  verification: {
+    google: "yMl9a-ry7u5iOS0vPoqsHJAfXXOYq6bqDNv0a8FTkw4",
+  },
+
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.png",
