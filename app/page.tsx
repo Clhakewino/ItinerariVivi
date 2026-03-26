@@ -1,6 +1,6 @@
 'use client'; // Necessario per usare gli hook in Next.js (App Router)
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Link from 'next/link';
 
@@ -20,6 +20,23 @@ export default function HomePage() {
         trip.titolo.toLowerCase().includes(searchLower) ||
         trip.slug.toLowerCase().includes(searchLower))
     }) : [];
+
+    const citiesToShowInFirstCarousel = [...ITINERARI_FULL].filter(trip => trip.homeCarousel.includes(1))
+
+  const [randomTrips, setRandomTrips] = useState([]);
+
+  useEffect(() => {
+    // Questa logica viene eseguita SOLO sul client dopo il primo caricamento
+    const shuffled = [...ITINERARI_FULL]
+      .filter(trip => trip.homeCarousel.includes(2)) // prendo solo elementi mostrabili nel carousel 2
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 6);
+    setRandomTrips(shuffled);
+  }, []);
+
+  // Se randomTrips è vuoto (durante il primo secondo di caricamento), 
+  // puoi mostrare dei placeholder o i primi 6 statici per evitare il salto visivo
+  const randomTripsToDisplay = randomTrips.length > 0 ? randomTrips : ITINERARI_FULL.slice(0, 6);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
@@ -107,14 +124,52 @@ export default function HomePage() {
 
         {/* CAROSELLO */}
         <header className="mb-12">
-          <h2 className="text-4xl font-bold">I nostri itinerari</h2>
-          <p className="text-slate-500 mt-2">Alcuni percorsi selezionati per la tua prossima avventura.</p>
+          <h2 className="text-4xl font-bold">Itinerari più amati</h2>
+          <p className="text-slate-500 mt-2">Alcuni dei percorsi più ricercati</p>
         </header>
 
         {/* CONTENITORE: Carosello su mobile, Grid da md in su */}
         <div className="-mx-8 px-8 -mt-7 relative z-10 flex overflow-x-auto gap-4 pb-8 -mb-8 snap-x snap-mandatory scrollbar-hide md:mx-0 md:px-0 md:mb-0 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8">
 
-          {ITINERARI_FULL.map((trip) => (
+          {citiesToShowInFirstCarousel.map((trip) => (
+            <div
+              key={trip.id}
+              className="group min-w-[80vw] md:min-w-0 overflow-hidden rounded-2xl bg-white shadow-md transition hover:shadow-xl snap-center"
+            >
+              {/* Immagine */}
+              <div
+                className="h-48 w-full bg-cover bg-center transition duration-500 group-hover:scale-110"
+                style={{ backgroundImage: `url(${trip.immagine})` }}
+              />
+
+              {/* Contenuto */}
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-xs font-bold uppercase text-rose-500">{trip.difficolta}</span>
+                  <span className="text-xs text-slate-400">{trip.durata}</span>
+                </div>
+                <h3 className="text-xl font-bold first-letter:uppercase">{trip.slug} - {trip.titolo}</h3>
+                <Link
+                  href={`/destinazioni/${trip.slug}`}
+                  className="mt-4 block w-full py-2 border border-slate-200 rounded-lg text-sm font-semibold text-center hover:bg-slate-900 hover:text-white transition"
+                >
+                  Vedi Dettagli
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CAROSELLO */}
+        <header className="mb-12">
+          <h2 className="text-4xl font-bold mt-12">Lasciati ispirare</h2>
+          <p className="text-slate-500 mt-2">Il viaggio perfetto che non avevi ancora pianificato</p>
+        </header>
+
+        {/* CONTENITORE: Carosello su mobile, Grid da md in su */}
+        <div className="-mx-8 px-8 -mt-7 relative z-10 flex overflow-x-auto gap-4 pb-8 -mb-8 snap-x snap-mandatory scrollbar-hide md:mx-0 md:px-0 md:mb-0 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8">
+
+          {randomTripsToDisplay.map((trip) => (
             <div
               key={trip.id}
               className="group min-w-[80vw] md:min-w-0 overflow-hidden rounded-2xl bg-white shadow-md transition hover:shadow-xl snap-center"

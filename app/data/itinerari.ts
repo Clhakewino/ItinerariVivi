@@ -6,6 +6,7 @@ interface PointOfInterest {
 
 interface Itinerario {
   id: number;
+  homeCarousel: number[];
   slug: string;
   titolo: string;
   durata: string;
@@ -18,6 +19,7 @@ interface Itinerario {
 export const ITINERARI_FULL: Itinerario[] = [
   {
     id: 1,
+    homeCarousel: [2],
     slug: "roma",
     titolo: "La Città Eterna",
     durata: "3 giorni",
@@ -59,6 +61,7 @@ export const ITINERARI_FULL: Itinerario[] = [
   },
   {
     id: 2,
+    homeCarousel: [1, 2],
     slug: "tokyo",
     titolo: "Caos ordinato, metropoli infinita",
     durata: "5 giorni",
@@ -100,6 +103,7 @@ export const ITINERARI_FULL: Itinerario[] = [
   },
   {
     id: 3,
+    homeCarousel: [1, 2],
     slug: "parigi",
     titolo: "Ville Lumière",
     durata: "4 giorni",
@@ -141,6 +145,7 @@ export const ITINERARI_FULL: Itinerario[] = [
   },
   {
     id: 4,
+    homeCarousel: [1, 2],
     slug: "barcellona",
     titolo: "L'Anima Mediterranea",
     durata: "4 giorni",
@@ -172,6 +177,7 @@ export const ITINERARI_FULL: Itinerario[] = [
   },
   {
     id: 5,
+    homeCarousel: [2],
     slug: "kyoto",
     titolo: "Il Cuore Spirituale del Giappone",
     durata: "5 giorni",
@@ -203,6 +209,7 @@ export const ITINERARI_FULL: Itinerario[] = [
   },
   {
     id: 6,
+    homeCarousel: [1, 2],
     slug: "newyork",
     titolo: "Il Centro del Mondo",
     durata: "4 giorni",
@@ -234,6 +241,96 @@ export const ITINERARI_FULL: Itinerario[] = [
         id: 5,
         titolo: "Top of the Rock",
         descrizione: "La vista migliore sull'Empire e l'intera isola."
+      }
+    ]
+  },
+  {
+    id: 7,
+    homeCarousel: [1, 2],
+    slug: "londra",
+    titolo: "The Big Smoke",
+    durata: "5 giorni",
+    difficolta: "Media",
+    immagine: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1600&auto=format&fit=crop",
+    contenuto: [
+      "Londra, la vibrante capitale del Regno Unito, è una metropoli dove la storia reale millenaria incontra l'avanguardia moderna. Divisa dal fiume Tamigi, la città è un mosaico di culture, quartieri storici e grattacieli iconici.",
+      "Dalle cerimonie solenni di Buckingham Palace all'energia creativa di Camden Town, Londra offre un'esperienza senza pari, unendo musei di classe mondiale a una scena gastronomica internazionale e parchi immensi nel cuore della città."
+    ],
+    pointsOfInterest: [
+      {
+        id: 1,
+        titolo: "Big Ben e Westminster",
+        descrizione: "L'iconica torre dell'orologio e il palazzo sede del parlamento britannico."
+      },
+      {
+        id: 2,
+        titolo: "London Eye",
+        descrizione: "La ruota panoramica che offre una vista a 360 gradi sullo skyline londinese."
+      },
+      {
+        id: 3,
+        titolo: "Tower Bridge",
+        descrizione: "Il ponte levatoio più famoso al mondo, capolavoro di ingegneria vittoriana."
+      },
+      {
+        id: 4,
+        titolo: "British Museum",
+        descrizione: "Uno dei musei più antichi al mondo, che custodisce la Stele di Rosetta."
+      },
+      {
+        id: 5,
+        titolo: "Piccadilly Circus",
+        descrizione: "Il cuore pulsante del West End, famoso per i suoi schermi luminosi e i teatri."
+      },
+      {
+        id: 6,
+        titolo: "The Shard",
+        descrizione: "Il grattacielo più alto d'Europa occidentale, per una vista vertiginosa."
+      }
+    ]
+  },
+  {
+    id: 8,
+    homeCarousel: [1, 2],
+    slug: "amsterdam",
+    titolo: "La Venezia del Nord",
+    durata: "3 giorni",
+    difficolta: "Facile",
+    immagine: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?q=80&w=1600&auto=format&fit=crop",
+    contenuto: [
+      "Amsterdam è una città unica al mondo, celebre per il suo intricato sistema di canali dichiarati Patrimonio dell'Umanità dall'UNESCO. È un luogo dove l'architettura del Secolo d'Oro si fonde con uno spirito di libertà e tolleranza leggendario.",
+      "Oltre ai suoi canali pittoreschi, Amsterdam è una capitale dell'arte e della bicicletta. Passeggiando per le sue strade acciottolate si scoprono musei prestigiosi, mercati dei fiori colorati e angoli nascosti di pace come il Begijnhof."
+    ],
+    pointsOfInterest: [
+      {
+        id: 1,
+        titolo: "Rijksmuseum",
+        descrizione: "Il museo nazionale che ospita i capolavori di Rembrandt e Vermeer."
+      },
+      {
+        id: 2,
+        titolo: "Casa di Anna Frank",
+        descrizione: "Il rifugio storico diventato un toccante museo dedicato alla memoria della Shoah."
+      },
+      {
+        id: 3,
+        titolo: "Van Gogh Museum",
+        descrizione: "La più grande collezione al mondo dedicata al geniale pittore olandese."
+      },
+      {
+        id: 4,
+        titolo: "Piazza Dam",
+        descrizione: "Il cuore storico della città, sede del Palazzo Reale e del Monumento Nazionale."
+      },
+      {
+        id: 5,
+        titolo: "Mercato dei Fiori (Bloemenmarkt)",
+        descrizione: "L'unico mercato dei fiori galleggiante al mondo, un'esplosione di tulipani e colori."
+      },
+      {
+        id: 6,
+        titolo: "Vondelpark",
+        descrizione: "Il polmone verde di Amsterdam, perfetto per un giro in bici o un picnic."
       }
     ]
   },
