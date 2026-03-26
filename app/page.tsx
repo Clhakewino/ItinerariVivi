@@ -61,7 +61,7 @@ export default function HomePage() {
       <div className="relative z-20 max-w-2xl mx-auto px-8 -mt-8">
         <div className="bg-white rounded-full shadow-xl flex items-center p-2 border border-slate-100">
           <input
-            type="text"
+            type="search"
             placeholder="Cerca la tua prossima meta..."
             className="flex-grow bg-transparent px-6 py-3 outline-none text-slate-600 placeholder:text-slate-400"
             value={searchTerm}
