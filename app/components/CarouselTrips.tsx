@@ -13,8 +13,8 @@ export default function CarouselTrips({ title, subtitle, itinerari }: CarouselPr
         // CAROSELLO
         <section>
             <header className="mb-12">
-                <h2 className="text-4xl font-bold">Itinerari più amati</h2>
-                <p className="text-slate-500 mt-2">Alcuni dei percorsi più ricercati</p>
+                <h2 className="text-4xl font-bold">title</h2>
+                <p className="text-slate-500 mt-2">subtitle</p>
             </header>
 
             {/*CONTENITORE: Carosello su mobile, Grid da md in su*/}
