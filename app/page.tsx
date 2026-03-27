@@ -22,6 +22,7 @@ export default function HomePage() {
         trip.slug.toLowerCase().includes(searchLower))
     }) : [];
 
+
   const citiesToShowInFirstCarousel = [...ITINERARI_FULL].filter(trip => trip.homeCarousel.includes(1))
 
   const [randomTrips, setRandomTrips] = useState<Itinerario[]>([]);
@@ -122,7 +123,7 @@ export default function HomePage() {
             <hr className="mt-12 border-slate-200" />
           </section>
         )}
-  
+
         {/* CAROSELLO */}
         <CarouselTrips
           title="Itinerari più amati"
@@ -130,14 +131,21 @@ export default function HomePage() {
           itinerari={citiesToShowInFirstCarousel}
         />
 
-        {/* CAROSELLO */}
-        <div className="my-12">
-        <CarouselTrips
-          title="Lasciati ispirare"
-          subtitle="Il viaggio perfetto che non avevi ancora pianificato"
-          itinerari={randomTripsToDisplay}
-        />
-        </div>
+        {/* SECONDO CAROSELLO: Appare solo quando randomTrips ha i dati */}
+      <div className="my-12">
+        {randomTrips.length > 0 ? (
+          <CarouselTrips
+            title="Lasciati ispirare"
+            subtitle="Il viaggio perfetto che non avevi ancora pianificato"
+            itinerari={randomTrips}
+          />
+        ) : (
+          /* Opzionale: Placeholder per evitare che la pagina "salti" quando i dati arrivano */
+          <div className="h-[400px] w-full bg-slate-50 animate-pulse rounded-2xl flex items-center justify-center text-slate-400">
+            Sto preparando gli itineriari...
+          </div>
+        )}
+      </div>
       </main>
     </div>
   );
