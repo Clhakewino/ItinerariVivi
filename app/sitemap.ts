@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next'
 import { getClient } from './sanity/sanityClient'
+import { getSanityClient } from '@/sanity/lib/sanity'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://itinerari-vivi.vercel.app'
-  const client = getClient(false) // sitemap usa solo contenuto pubblicato
+  const client = await getSanityClient() // sitemap usa solo contenuto pubblicato
 
   const itinerari = await client.fetch(`*[_type == "itinerary"]{ "slug": slug.current }`)
 
