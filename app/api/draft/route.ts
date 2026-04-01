@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const secret = searchParams.get('secret')
   const slug = searchParams.get('slug') ?? '/'
 
-  if (secret !== process.env.SANITY_REVALIDATE_SECRET) {
+  if (secret !== process.env.SANITY_PREVIEW_SECRET) {
     return new Response('Invalid token', { status: 401 })
   }
 
