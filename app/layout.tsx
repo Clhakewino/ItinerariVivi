@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 // 1. Importa il componente (assumendo che lo crei in components/Navbar.tsx)
-import Navbar from "./components/Navbar";
+import NavbarWrapper from "./components/NavbarWrapper";
+import { SanityLive } from "@/sanity/live";
+import { VisualEditing } from 'next-sanity/visual-editing'
+import { draftMode } from 'next/headers'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +32,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -41,11 +44,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-slate-50">
         {/* 2. La Navbar va qui: sarà visibile in tutte le rotte */}
-        <Navbar />
+        <NavbarWrapper  />
 
         {/* 3. Il contenuto della pagina specifica viene iniettato qui */}
         <main className="flex-grow">
           {children}
+          <VisualEditing />
         </main>
 
         {/* Opzionale: qui potresti aggiungere un Footer */}

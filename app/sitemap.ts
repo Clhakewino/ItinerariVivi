@@ -1,27 +1,20 @@
 import { MetadataRoute } from 'next'
-import { ITINERARI_FULL } from './data/itinerari';
+import { getClient } from './sanity/sanityClient'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://itinerari-vivi.vercel.app';
+  const baseUrl = 'https://itinerari-vivi.vercel.app'
+  const client = getClient(false) // sitemap usa solo contenuto pubblicato
 
-  // rotte statiche (Home, Chi Siamo, ecc.)
-  const staticRoutes = [
+  const itinerari = await client.fetch(`*[_type == "itinerary"]{ "slug": slug.current }`)
+
+  return [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'daily' as const,
-      priority: 1,
     },
-  ];
-
-  // Genera dinamicamente le rotte per le destinazioni
-  
-  const dynamicRoutes = ITINERARI_FULL.map((citta) => ({
-    url: `${baseUrl}/destinazioni/${citta.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'daily' as const,
-    priority: 0.6,
-  }));
-
-  return [...staticRoutes, ...dynamicRoutes];
+    ...itinerari.map((i: any) => ({
+      url: `${baseUrl}/destinazioni/${i.slug}`,
+      lastModified: new Date(),
+    })),
+  ]
 }

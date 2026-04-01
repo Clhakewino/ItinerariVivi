@@ -1,28 +1,41 @@
 // components/Navbar.tsx
-'use client'; // Necessario per usare gli hooks
+'use client'; // Necessario per usare gli hooks (useState e useEffect)
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useMemo } from 'react';
 import { Search, X } from 'lucide-react'; // X serve per chiudere
-import { ITINERARI_FULL } from '../data/itinerari';
+import { Itinerario } from '../data/itinerari';
+import { searchItinerari } from '../sanity/queries';
 
-export default function Navbar() {
+type Props = {
+  draftModeEnabled: boolean
+}
+
+export default function Navbar({ draftModeEnabled }: Props) {
   const pathname = usePathname();
   const [showSearchIcon, setShowSearchIcon] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Stato per il pannello di ricerca
+
   // Definiamo lo stato per il termine di ricerca
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('')
+  const [results, setResults] = useState<Itinerario[]>([])
 
-  // Filtra i risultati in tempo reale
-  const searchResults = useMemo(() => {
-    if (searchTerm.length < 2) return [];
-    return ITINERARI_FULL.filter(trip =>
-      trip.titolo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      trip.slug.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [searchTerm]);
+  // effettua ricerca
+  useEffect(() => {
+    const delay = setTimeout(async () => {
+      if (searchTerm.length > 1) {
+        const data = await searchItinerari(searchTerm, draftModeEnabled)
+        setResults(data)
+      } else {
+        setResults([])
+      }
+    }, 300)
 
+    return () => clearTimeout(delay)
+  }, [searchTerm, draftModeEnabled])
+
+  // Mostra se non siamo in home OPPURE se abbiamo scrollato più di 250px
   useEffect(() => {
     const handleScroll = () => {
       // Logica: Mostra se non siamo in home OPPURE se abbiamo scrollato più di 250px
@@ -91,14 +104,14 @@ export default function Navbar() {
             {searchTerm.length > 1 && (
               <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <h2 className="text-xl font-bold mb-6 text-slate-400 uppercase tracking-tight">
-                  {searchResults.length} Risultati per: <span className="text-slate-800">"{searchTerm}"</span>
+                  {results.length} Risultati per: <span className="text-slate-800">"{searchTerm}"</span>
                 </h2>
 
-                {searchResults.length > 0 ? (
+                {results.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {searchResults.map((trip) => (
+                    {results.map((trip) => (
                       <Link
-                        key={`search-${trip.id}`}
+                        key={`search-${trip._id}`}
                         href={`/destinazioni/${trip.slug}`}
                         className="group flex items-center gap-4 bg-white p-0 rounded-xl shadow-sm hover:shadow-xl hover:ring-2 hover:ring-rose-500/20 transition-all border border-slate-100"
                       >

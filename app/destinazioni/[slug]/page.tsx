@@ -1,17 +1,21 @@
-import { ITINERARI_FULL } from "../../data/itinerari";
+import { Itinerario, PointOfInterest } from "../../data/itinerari";
 import { notFound } from 'next/navigation';
 import parse from 'html-react-parser';
+import { getItinerarioBySlug } from '../../sanity/queries';
+import { PortableText } from "next-sanity";
+
+import { draftMode } from 'next/headers'
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { slug } = await params;
 
-  const city = ITINERARI_FULL.find(
-    (item) => item.slug.toLowerCase() === slug.toLowerCase()
-  );
+  const draftModeEnabled = (await draftMode()).isEnabled
+
+  const city = await getItinerarioBySlug(slug, draftModeEnabled);
 
   if (!city) {
     notFound();
-  }       
+  }
 
   return {
     title: `${city.slug.toUpperCase()}`,
@@ -30,7 +34,9 @@ export default async function CityPage({ params }: { params: { slug: string } })
 
   const { slug } = await params;
 
-  const city = ITINERARI_FULL.find((item) => item.slug.toLowerCase() === slug.toLowerCase());
+  const draftModeEnabled = (await draftMode()).isEnabled
+
+  const city = await getItinerarioBySlug(slug, draftModeEnabled);
 
   if (!city) {
     notFound();
@@ -46,12 +52,12 @@ export default async function CityPage({ params }: { params: { slug: string } })
     "url": `https://itinerari-vivi.vercel.app/destinazioni/${city.slug}`,
     "itinerary": {
       "@type": "ItemList",
-      "itemListElement": city.pointsOfInterest.map((poi, index) => ({
+      "itemListElement": city.pointsOfInterest?.map((poi, index) => ({
         "@type": "ListItem",
         "position": index + 1,
         "name": poi.titolo,
         "description": poi.descrizione
-      }))
+      })) || []
     }
   };
 
@@ -88,17 +94,19 @@ export default async function CityPage({ params }: { params: { slug: string } })
               dei luoghi più iconici e dei segreti meglio custoditi della città.
             </p>
             <div className="space-y-4 mb-8">
-              {city.contenuto.map((paragrafo, index) => (
-                <p key={index} className="text-slate-600 leading-relaxed text-base">
-                  {parse(paragrafo)}
-                </p>
-              ))}
+              <p className="text-slate-600 leading-relaxed text-base">
+                {city.contenuto ? (
+                  <PortableText value={city.contenuto} />
+                ) : (
+                  "Nessun contenuto disponibile"
+                )}
+              </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 -mx-4">
               <div className="p-2 border border-slate-150 rounded-xl bg-slate-50/50">
-                {city.pointsOfInterest.map((poi) => (
-                  <div key={poi.id} className="p-3 border-b">
+                {city.pointsOfInterest?.map((poi: PointOfInterest) => (
+                  <div key={poi._key || poi.titolo} className="p-3 border-b">
                     <h3 className="font-bold text-rose-500 mb-2">{poi.titolo}</h3>
                     <p className="text-sm text-slate-500">{poi.descrizione}</p>
                   </div>

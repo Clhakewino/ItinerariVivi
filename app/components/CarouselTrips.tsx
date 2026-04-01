@@ -21,7 +21,7 @@ export default function CarouselTrips({ title, subtitle, itinerari }: CarouselPr
             <div className="-mx-8 px-8 -mt-7 relative z-10 flex overflow-x-auto gap-4 pb-8 -mb-8 snap-x snap-mandatory scrollbar-hide md:mx-0 md:px-0 md:mb-0 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8">
                 {itinerari.map((trip) => (
                     <div
-                        key={trip.id}
+                        key={trip._id}
                         className="group min-w-[80vw] md:min-w-0 overflow-hidden rounded-2xl bg-white shadow-md transition hover:shadow-xl snap-center"
                     >
                         {/* Immagine */}
