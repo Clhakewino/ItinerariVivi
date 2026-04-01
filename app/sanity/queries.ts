@@ -18,7 +18,7 @@ export async function getItinerari(isDraft: boolean): Promise<Itinerario[]> {
     pointsOfInterest
   }`
 
-  return await client.fetch(query, {}, { perspective: 'previewDrafts'})
+  return await client.fetch(query, {}, { perspective: isDraft ? 'previewDrafts' : 'published' })
 }
 
 // Se ti serve un singolo itinerario tramite lo slug
@@ -36,7 +36,7 @@ export async function getItinerarioBySlug(slug: string, isDraft: boolean): Promi
     pointsOfInterest
   }`
 
-  return await client.fetch(query, { slug: slug }, { perspective: 'previewDrafts'})
+  return await client.fetch(query, { slug: slug }, { perspective: isDraft ? 'previewDrafts' : 'published' })
 }
 
 // Se ti servono itinerari di un preciso homeCarousel
@@ -54,7 +54,7 @@ export async function getItinerariWithId(idCarousel: number, isDraft: boolean): 
     pointsOfInterest
   }`
 
-  return await client.fetch(query, { idCarousel }, { perspective: 'previewDrafts' })
+  return await client.fetch(query, { idCarousel }, { perspective: isDraft ? 'previewDrafts' : 'published' })
 }
 
 // Ricerca itinerari per titolo o contenuto
@@ -73,5 +73,5 @@ export async function searchItinerari(searchTerm: string, isDraft: boolean): Pro
     pointsOfInterest
   }`
 
-  return await client.fetch(query, { searchTerm }, { perspective: 'previewDrafts'})
+  return await client.fetch(query, { searchTerm }, { perspective: isDraft ? 'previewDrafts' : 'published' })
 }
