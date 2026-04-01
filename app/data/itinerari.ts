@@ -13,5 +13,5 @@ export interface Itinerario {
   difficolta: string;
   immagine: string; // URL dell'immagine trasformato da Sanity
   contenuto: any;   // Se usi Portable Text (il builder di Sanity), usa 'any' o il tipo specifico di Sanity
-  pointsOfInterest: PointOfInterest[];
+  pointsOfInterest: PointOfInterest[]; 
 }
