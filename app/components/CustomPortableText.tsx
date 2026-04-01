@@ -1,0 +1,66 @@
+import { PortableText, PortableTextComponents } from '@portabletext/react';
+import urlBuilder from '@sanity/image-url';
+import Image from 'next/image';
+import imageUrlBuilder from '@sanity/image-url';
+import { client } from '@/sanity/client';
+
+// Configura il builder per le immagini (sostituisci con i tuoi dati o usa il tuo client Sanity)
+const builder = imageUrlBuilder(client);
+
+const components: PortableTextComponents = {
+  types: {
+    image: ({ value }) => {
+      if (!value?.asset?._ref) return null;
+      return (
+        <div className="my-10">
+          <Image
+            src={builder.image(value).width(1200).url()}
+            alt={value.alt || 'Immagine'}
+            width={1200}
+            height={675}
+            className="rounded-2xl shadow-lg object-cover w-full h-auto"
+          />
+          {value.caption && <p className="text-center text-sm text-slate-500 mt-3 italic">{value.caption}</p>}
+        </div>
+      );
+    },
+  },
+
+  // 👇 AGGIUNGI QUESTE SEZIONI PER TITOLI E LISTE
+  block: {
+    h1: ({ children }) => <h1 className="text-4xl font-extrabold text-slate-900 mt-12 mb-6 tracking-tight">{children}</h1>,
+    h2: ({ children }) => <h2 className="text-3xl font-bold text-slate-800 mt-10 mb-5 tracking-tight">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-2xl font-semibold text-slate-800 mt-8 mb-4">{children}</h3>,
+    normal: ({ children }) => <p className="text-lg leading-relaxed text-slate-700 mb-6">{children}</p>,
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-4 border-rose-500 pl-4 italic my-8 text-slate-600 bg-slate-50 p-4 rounded-r-lg">
+        {children}
+      </blockquote>
+    ),
+  },
+
+  list: {
+    // Gestisce <ul>
+    bullet: ({ children }) => <ul className="list-disc list-inside ml-4 mb-6 space-y-2 text-slate-700">{children}</ul>,
+    // Gestisce <ol>
+    number: ({ children }) => <ol className="list-decimal list-inside ml-4 mb-6 space-y-2 text-slate-700">{children}</ol>,
+  },
+
+  listItem: {
+    bullet: ({ children }) => <li className="marker:text-rose-500">{children}</li>,
+    number: ({ children }) => <li className="marker:font-bold">{children}</li>,
+  },
+
+  marks: {
+    strong: ({ children }) => <strong className="font-bold text-slate-900">{children}</strong>,
+    link: ({ children, value }) => (
+      <a href={value.href} className="text-rose-600 underline hover:text-rose-700 transition-colors">
+        {children}
+      </a>
+    ),
+  },
+};
+
+export default function CustomPortableText({ value }: { value: any }) {
+  return <PortableText value={value} components={components} />;
+}

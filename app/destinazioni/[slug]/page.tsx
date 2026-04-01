@@ -5,6 +5,7 @@ import { getItinerarioBySlug } from '../../sanity/queries';
 import { PortableText } from "next-sanity";
 
 import { draftMode } from 'next/headers'
+import CustomPortableText from '../../components/CustomPortableText';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { slug } = await params;
@@ -86,33 +87,38 @@ export default async function CityPage({ params }: { params: { slug: string } })
         </div>
 
         {/* CONTENUTO - Qui puoi mappare le descrizioni che avevi nei file HTML */}
-        <main className="max-w-4x1 mx-auto px-4 -mt-14 relative z-10 pb-20">
+        <main className="max-w-4xl mx-auto px-4 -mt-14 relative z-10 pb-20">
           <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12">
-            <h2 className="text-3xl font-bold mb-6 text-slate-800">L'essenza di {city.slug}</h2>
-            <p className="text-slate-600 leading-relaxed text-base mb-4">
-              Benvenuti a {city.titolo}. Questo itinerario di {city.durata} ti porterà alla scoperta
-              dei luoghi più iconici e dei segreti meglio custoditi della città.
-            </p>
-            <div className="space-y-4 mb-8">
-              <p className="text-slate-600 leading-relaxed text-base">
-                {city.contenuto ? (
-                  <PortableText value={city.contenuto} />
-                ) : (
-                  "Nessun contenuto disponibile"
-                )}
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6 -mx-4">
-              <div className="p-2 border border-slate-150 rounded-xl bg-slate-50/50">
-                {city.pointsOfInterest?.map((poi: PointOfInterest) => (
-                  <div key={poi._key || poi.titolo} className="p-3 border-b">
-                    <h3 className="font-bold text-rose-500 mb-2">{poi.titolo}</h3>
-                    <p className="text-sm text-slate-500">{poi.descrizione}</p>
-                  </div>
-                ))}
+            
+            <header className="mb-10">
+              <div className="flex gap-4 text-sm font-medium text-rose-500 uppercase tracking-wider mb-6">
+                <span>⏱️ {city.durata}</span>
+                <span>📊 Difficoltà: {city.difficolta}</span>
               </div>
-            </div>
+              <p className="text-slate-600 leading-relaxed text-lg italic">
+                Benvenuti a {city.titolo}. Questo itinerario ti porterà alla scoperta
+                dei luoghi più iconici e dei segreti meglio custoditi della città.
+              </p>
+            </header>
+            {/* AREA PORTABLE TEXT: Qui appaiono Testo e Immagini mixate */}
+            <article className="text-black prose prose-slate max-w-none mb-12">
+              <CustomPortableText value={city.contenuto} />
+            </article>
+
+            {/* SEZIONE PUNTI DI INTERESSE (Lista tecnica) */}
+            {city.pointsOfInterest && city.pointsOfInterest.length > 0 && (
+              <div className="mt-12 pt-10 border-t border-slate-100">
+                <h3 className="text-2xl font-bold mb-6 text-slate-800">Punti di interesse inclusi</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {city.pointsOfInterest.map((poi: any) => (
+                    <div key={poi._key || poi.titolo} className="p-5 border border-slate-100 rounded-xl bg-slate-50/50 hover:bg-white hover:shadow-md transition-all">
+                      <h4 className="font-bold text-rose-500 mb-2">{poi.titolo}</h4>
+                      <p className="text-sm text-slate-600 leading-snug">{poi.descrizione}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </main>
       </div>
