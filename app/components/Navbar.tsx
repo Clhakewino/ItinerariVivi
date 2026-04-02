@@ -3,16 +3,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, X } from 'lucide-react'; // X serve per chiudere
 import { Itinerario } from '../data/itinerari';
 import { searchItinerari } from '../sanity/queries';
 
-type Props = {
-  draftModeEnabled: boolean
-}
-
-export default function Navbar({ draftModeEnabled }: Props) {
+export default function Navbar() {
   const pathname = usePathname();
   const [showSearchIcon, setShowSearchIcon] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Stato per il pannello di ricerca
@@ -25,7 +21,7 @@ export default function Navbar({ draftModeEnabled }: Props) {
   useEffect(() => {
     const delay = setTimeout(async () => {
       if (searchTerm.length > 1) {
-        const data = await searchItinerari(searchTerm, draftModeEnabled)
+        const data = await searchItinerari(searchTerm)
         setResults(data)
       } else {
         setResults([])
@@ -33,7 +29,7 @@ export default function Navbar({ draftModeEnabled }: Props) {
     }, 300)
 
     return () => clearTimeout(delay)
-  }, [searchTerm, draftModeEnabled])
+  }, [searchTerm])
 
   // Mostra se non siamo in home OPPURE se abbiamo scrollato più di 250px
   useEffect(() => {
