@@ -77,7 +77,7 @@ export default async function CityPage({ params }: { params: { slug: string } })
         >
           <div className="absolute inset-0 bg-black/30" />
           <div className="relative text-center text-white p-4">
-            <h1 className="text-5xl md:text-7xl font-light uppercase tracking-[10px] drop-shadow-2xl">
+            <h1 className="text-[9vw] md:text-7xl font-light uppercase tracking-[0.2em] drop-shadow-2xl break-words max-w-full px-4">
               {city.slug}
             </h1>
             <p className="mt-4 text-lg uppercase tracking-[4px] border-t border-white/40 pt-4 inline-block">
