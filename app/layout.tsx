@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-// 1. Importa il componente (assumendo che lo crei in components/Navbar.tsx)
-import { VisualEditing } from 'next-sanity/visual-editing'
 import Navbar from "./components/Navbar";
 
 const geistSans = Geist({
@@ -47,7 +45,6 @@ export default async function RootLayout({
         {/* 3. Il contenuto della pagina specifica viene iniettato qui */}
         <main className="flex-grow">
           {children}
-          <VisualEditing />
         </main>
 
         {/* Opzionale: qui potresti aggiungere un Footer */}
