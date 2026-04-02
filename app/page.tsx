@@ -1,14 +1,11 @@
 import CarouselTrips from './components/CarouselTrips';
 import SearchBarWrapper from './components/SearchBarWrapper';
 import { getItinerariWithId } from './sanity/queries';
-import { draftMode } from 'next/headers'
 
 export default async function HomePage() {
-  const draftModeEnabled = (await draftMode()).isEnabled
-
   // Questi fetch avvengono sul server all'avvio della pagina
-  const itineraryFirstCarousel = await getItinerariWithId(1, draftModeEnabled);
-  const itinerarySecondCarousel = await getItinerariWithId(2, draftModeEnabled);
+  const itineraryFirstCarousel = await getItinerariWithId(1);
+  const itinerarySecondCarousel = await getItinerariWithId(2);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">

@@ -3,7 +3,7 @@ import { Itinerario } from "../data/itinerari"
 
 
 // Questa funzione sostituisce la costante ITINERARI_FULL
-export async function getItinerari(isDraft: boolean): Promise<Itinerario[]> {
+export async function getItinerari(): Promise<Itinerario[]> {
   const query = `*[_type == "itinerary"]{
     _id,
     "slug": slug.current,
@@ -16,11 +16,11 @@ export async function getItinerari(isDraft: boolean): Promise<Itinerario[]> {
     pointsOfInterest
   }`
 
-  return await client.fetch(query, {}, { perspective: isDraft ? 'previewDrafts' : 'published' })
+  return await client.fetch(query)
 }
 
 // Se ti serve un singolo itinerario tramite lo slug
-export async function getItinerarioBySlug(slug: string, isDraft: boolean): Promise<Itinerario> {
+export async function getItinerarioBySlug(slug: string): Promise<Itinerario> {
   const query = `*[_type == "itinerary" && slug.current == $slug][0]{
     _id,
     "slug": slug.current,
@@ -33,11 +33,11 @@ export async function getItinerarioBySlug(slug: string, isDraft: boolean): Promi
     pointsOfInterest
   }`
 
-  return await client.fetch(query, { slug: slug }, { perspective: isDraft ? 'previewDrafts' : 'published' })
+  return await client.fetch(query, { slug })
 }
 
 // Se ti servono itinerari di un preciso homeCarousel
-export async function getItinerariWithId(idCarousel: number, isDraft: boolean): Promise<Itinerario[]> {
+export async function getItinerariWithId(idCarousel: number): Promise<Itinerario[]> {
   const query = `*[_type == "itinerary" && $idCarousel in homeCarousel]{
     _id,
     "slug": slug.current,
@@ -50,11 +50,11 @@ export async function getItinerariWithId(idCarousel: number, isDraft: boolean): 
     pointsOfInterest
   }`
 
-  return await client.fetch(query, { idCarousel }, { perspective: isDraft ? 'previewDrafts' : 'published' })
+  return await client.fetch(query, { idCarousel })
 }
 
 // Ricerca itinerari per titolo o contenuto
-export async function searchItinerari(searchTerm: string, isDraft: boolean): Promise<Itinerario[]> {
+export async function searchItinerari(searchTerm: string): Promise<Itinerario[]> {
   // Aggiungiamo un asterisco alla fine del termine per cercare "inizia con" (es. "rom" trova "roma")
   const query = `*[_type == "itinerary" && (slug.current match $searchTerm + "*" || titolo match $searchTerm + "*" || contenuto match $searchTerm + "*")]{
     _id,
@@ -68,5 +68,5 @@ export async function searchItinerari(searchTerm: string, isDraft: boolean): Pro
     pointsOfInterest
   }`
 
-  return await client.fetch(query, { searchTerm }, { perspective: isDraft ? 'previewDrafts' : 'published' })
+  return await client.fetch(query, { searchTerm })
 }

@@ -5,25 +5,21 @@ import Link from 'next/link'
 import { searchItinerari } from '../sanity/queries'
 import { Itinerario } from '../data/itinerari'
 
-type Props = {
-  draftModeEnabled: boolean
-}
-
-export default function SearchBar({ draftModeEnabled }: Props) {
+export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('')
   const [results, setResults] = useState<Itinerario[]>([])
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (searchTerm.length > 1) {
-        const data = await searchItinerari(searchTerm, draftModeEnabled)
+        const data = await searchItinerari(searchTerm)
         setResults(data)
       } else {
         setResults([])
       }
     }, 300)
     return () => clearTimeout(delayDebounceFn)
-  }, [searchTerm, draftModeEnabled])
+  }, [searchTerm])
 
   return (
     <div className="relative">
