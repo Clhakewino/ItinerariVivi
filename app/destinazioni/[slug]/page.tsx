@@ -1,18 +1,12 @@
-import { Itinerario, PointOfInterest } from "../../data/itinerari";
 import { notFound } from 'next/navigation';
-import parse from 'html-react-parser';
 import { getItinerarioBySlug } from '../../sanity/queries';
-import { PortableText } from "next-sanity";
 
-import { draftMode } from 'next/headers'
 import CustomPortableText from '../../components/CustomPortableText';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { slug } = await params;
 
-  const draftModeEnabled = (await draftMode()).isEnabled
-
-  const city = await getItinerarioBySlug(slug, draftModeEnabled);
+  const city = await getItinerarioBySlug(slug);
 
   if (!city) {
     notFound();
@@ -35,9 +29,7 @@ export default async function CityPage({ params }: { params: { slug: string } })
 
   const { slug } = await params; // ci vuole await
 
-  const draftModeEnabled = (await draftMode()).isEnabled
-
-  const city = await getItinerarioBySlug(slug, draftModeEnabled);
+  const city = await getItinerarioBySlug(slug);
 
   if (!city) {
     notFound();
