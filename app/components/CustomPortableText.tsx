@@ -1,7 +1,7 @@
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import Image from 'next/image';
 import { createImageUrlBuilder } from '@sanity/image-url'
-import { client } from '@/sanity/client';
+import { client } from '@/app/sanity/sanityClient';
 
 // Configura il builder per le immagini (sostituisci con i tuoi dati o usa il tuo client Sanity)
 const builder = createImageUrlBuilder(client);

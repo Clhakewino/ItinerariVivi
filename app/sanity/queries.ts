@@ -1,11 +1,9 @@
-import { getClient } from './sanityClient'
+import { client } from './sanityClient'
 import { Itinerario } from "../data/itinerari"
-import { sanityClient } from '@/sanity/lib/sanity'
 
 
 // Questa funzione sostituisce la costante ITINERARI_FULL
 export async function getItinerari(isDraft: boolean): Promise<Itinerario[]> {
-  const client = sanityClient
   const query = `*[_type == "itinerary"]{
     _id,
     "slug": slug.current,
@@ -23,7 +21,6 @@ export async function getItinerari(isDraft: boolean): Promise<Itinerario[]> {
 
 // Se ti serve un singolo itinerario tramite lo slug
 export async function getItinerarioBySlug(slug: string, isDraft: boolean): Promise<Itinerario> {
-  const client = sanityClient
   const query = `*[_type == "itinerary" && slug.current == $slug][0]{
     _id,
     "slug": slug.current,
@@ -41,7 +38,6 @@ export async function getItinerarioBySlug(slug: string, isDraft: boolean): Promi
 
 // Se ti servono itinerari di un preciso homeCarousel
 export async function getItinerariWithId(idCarousel: number, isDraft: boolean): Promise<Itinerario[]> {
-  const client = sanityClient
   const query = `*[_type == "itinerary" && $idCarousel in homeCarousel]{
     _id,
     "slug": slug.current,
@@ -59,7 +55,6 @@ export async function getItinerariWithId(idCarousel: number, isDraft: boolean): 
 
 // Ricerca itinerari per titolo o contenuto
 export async function searchItinerari(searchTerm: string, isDraft: boolean): Promise<Itinerario[]> {
-  const client = sanityClient
   // Aggiungiamo un asterisco alla fine del termine per cercare "inizia con" (es. "rom" trova "roma")
   const query = `*[_type == "itinerary" && (slug.current match $searchTerm + "*" || titolo match $searchTerm + "*" || contenuto match $searchTerm + "*")]{
     _id,
