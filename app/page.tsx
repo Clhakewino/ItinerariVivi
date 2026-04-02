@@ -1,5 +1,5 @@
 import CarouselTrips from './components/CarouselTrips';
-import SearchBarWrapper from './components/SearchBarWrapper';
+import SearchBar from './components/SearchBar';
 import { getItinerariWithId } from './sanity/queries';
 
 export default async function HomePage() {
@@ -21,7 +21,7 @@ export default async function HomePage() {
 
       {/* BARRA DI RICERCA (Client Component) */}
       <div className="relative z-20 max-w-2xl mx-auto px-8 -mt-8">
-        <SearchBarWrapper />
+        <SearchBar />
       </div>
 
       <main className="max-w-7xl mx-auto px-8 pt-8 pb-12 md:pt-20">
