@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 // 1. Importa il componente (assumendo che lo crei in components/Navbar.tsx)
 import NavbarWrapper from "./components/NavbarWrapper";
-import { SanityLive } from "@/sanity/live";
 import { VisualEditing } from 'next-sanity/visual-editing'
 import { draftMode } from 'next/headers'
 
