@@ -4,7 +4,7 @@ const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: '2024-01-01',
-  useCdn: true,
+  useCdn: false,
 }
 
 // Client pubblico — usato nei Client Components e sitemap
@@ -17,7 +17,7 @@ export async function getSanityClient() {
 
   return createClient({
     ...config,
-    useCdn: !isEnabled,
+    useCdn: false,// !isEnabled,
     token: isEnabled ? process.env.SANITY_API_READ_TOKEN : undefined,
     perspective: isEnabled ? 'previewDrafts' : 'published',
   })
