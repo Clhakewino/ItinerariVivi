@@ -1,26 +1,33 @@
 import { PortableText, PortableTextComponents } from '@portabletext/react';
-import urlBuilder from '@sanity/image-url';
 import Image from 'next/image';
-import imageUrlBuilder from '@sanity/image-url';
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { client } from '@/sanity/client';
 
 // Configura il builder per le immagini (sostituisci con i tuoi dati o usa il tuo client Sanity)
-const builder = imageUrlBuilder(client);
+const builder = createImageUrlBuilder(client);
 
 const components: PortableTextComponents = {
   types: {
     image: ({ value }) => {
       if (!value?.asset?._ref) return null;
       return (
-        <div className="my-10">
-          <Image
-            src={builder.image(value).width(1200).url()}
-            alt={value.alt || 'Immagine'}
-            width={1200}
-            height={675}
-            className="rounded-2xl shadow-lg object-cover w-full h-auto"
-          />
-          {value.caption && <p className="text-center text-sm text-slate-500 mt-3 italic">{value.caption}</p>}
+        <div className="my-10 -mx-4 md:-mx-10">
+          <div className="max-w-4xl mx-auto">
+            <Image
+              src={builder.image(value).width(1200).url()}
+              alt={value.alt || 'Immagine'}
+              width={1200}
+              height={675}
+              sizes="100vw"
+              className="rounded-2xl shadow-lg object-cover w-full h-auto"
+            />
+          </div>
+
+          {value.caption && (
+            <p className="text-center text-sm text-slate-500 mt-3 italic px-6 md:px-10">
+              {value.caption}
+            </p>
+          )}
         </div>
       );
     },

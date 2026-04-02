@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function CityPage({ params }: { params: { slug: string } }) {
 
-  const { slug } = await params;
+  const { slug } = await params; // ci vuole await
 
   const draftModeEnabled = (await draftMode()).isEnabled
 
@@ -87,10 +87,10 @@ export default async function CityPage({ params }: { params: { slug: string } })
         </div>
 
         {/* CONTENUTO - Qui puoi mappare le descrizioni che avevi nei file HTML */}
-        <main className="max-w-4xl mx-auto px-4 -mt-14 relative z-10 pb-20">
-          <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12">
+        <main className="max-w-7xl mx-auto px-2 -mt-14 relative z-10 pb-20">
+          <div className="bg-white rounded-2xl shadow-2xl py-8 px-4 md:p-12">
             
-            <header className="mb-10">
+            <header className="mb-8">
               <div className="flex gap-4 text-sm font-medium text-rose-500 uppercase tracking-wider mb-6">
                 <span>⏱️ {city.durata}</span>
                 <span>📊 Difficoltà: {city.difficolta}</span>
@@ -101,7 +101,7 @@ export default async function CityPage({ params }: { params: { slug: string } })
               </p>
             </header>
             {/* AREA PORTABLE TEXT: Qui appaiono Testo e Immagini mixate */}
-            <article className="text-black prose prose-slate max-w-none mb-12">
+            <article className="text-black max-w-none mb-12">
               <CustomPortableText value={city.contenuto} />
             </article>
 
