@@ -25,7 +25,7 @@ export default async function HomePage() {
       </div>
 
       <main className="max-w-7xl mx-auto px-8 pt-8 pb-12 md:pt-20">
-        {itinerarySecondCarousel.length > 0 && (
+        {itineraryFirstCarousel.length > 0 && (
           <CarouselTrips
             title="Itinerari più amati"
             subtitle='Alcuni dei percorsi più ricercati'

@@ -87,10 +87,6 @@ export default async function CityPage({ params }: { params: { slug: string } })
                 <span>⏱️ {city.durata}</span>
                 <span>📊 Difficoltà: {city.difficolta}</span>
               </div>
-              <p className="text-slate-600 leading-relaxed text-lg italic">
-                Benvenuti a {city.titolo}. Questo itinerario ti porterà alla scoperta
-                dei luoghi più iconici e dei segreti meglio custoditi della città.
-              </p>
             </header>
             {/* AREA PORTABLE TEXT: Qui appaiono Testo e Immagini mixate */}
             <article className="text-black max-w-none mb-12">
