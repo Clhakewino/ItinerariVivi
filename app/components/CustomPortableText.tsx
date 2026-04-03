@@ -38,7 +38,7 @@ const components: PortableTextComponents = {
     h1: ({ children }) => <h1 className="text-4xl font-extrabold text-slate-900 mt-12 mb-6 tracking-tight">{children}</h1>,
     h2: ({ children }) => <h2 className="text-3xl font-bold text-slate-800 mt-10 mb-5 tracking-tight">{children}</h2>,
     h3: ({ children }) => <h3 className="text-2xl font-semibold text-slate-800 mt-8 mb-4">{children}</h3>,
-    normal: ({ children }) => <p className="text-lg leading-relaxed text-slate-700 mb-6">{children}</p>,
+    normal: ({ children }) => <p className="text-lg lg:text-base leading-relaxed text-slate-700 mb-6">{children}</p>,
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-rose-500 pl-4 italic my-8 text-slate-600 bg-slate-50 p-4 rounded-r-lg">
         {children}
