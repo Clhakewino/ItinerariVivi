@@ -108,7 +108,7 @@ export default function Navbar() {
                     {results.map((trip) => (
                       <Link
                         key={`search-${trip._id}`}
-                        href={`/${trip.cityName.toLowerCase()}`}
+                        href={`/${trip.cityName}`}
                         className="group flex items-center gap-4 bg-white p-0 rounded-xl shadow-sm hover:shadow-xl hover:ring-2 hover:ring-rose-500/20 transition-all border border-slate-100"
                       >
                         <div

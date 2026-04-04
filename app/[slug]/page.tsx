@@ -54,8 +54,6 @@ export default async function CityPage({ params }: { params: { slug: string } })
     }
   };
 
-  console.log(city.listaItinerari[0].immagine);
-
   return (
     <section>
       {/* Iniezione del JSON-LD */}
