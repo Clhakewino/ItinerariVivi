@@ -59,21 +59,23 @@ export async function getItinerariWithId(idCarousel: number): Promise<any[]> {
 export async function searchItinerari(searchTerm: string): Promise<Itinerario[]> {
   const queryTerm = `${searchTerm}*`
 
-  const query = `*[_type == "city" && (name match $queryTerm)] || *[_type == "city"] {
-    "itinerariTrovati": listaItinerari[
-      titolo match $queryTerm || 
-      contenuto[].children[].text match $queryTerm
-    ] {
-      "slug": slug.current,
-      titolo,
-      homeCarousel,
-      durata,
-      difficolta,
-      "immagine": immagine.asset->url,
-      contenuto,
-      pointsOfInterest
-    }
-  }[count(itinerariTrovati) > 0].itinerariTrovati`
+  const query = `*[_type == "city"] {
+  "itinerariTrovati": listaItinerari[
+  ^.name match $queryTerm || // Cerca se il nome della città combacia
+    sottotitolo match $queryTerm || 
+    contenuto[].children[].text match $queryTerm
+  ] {
+    _id,
+    "cityName": ^.name,
+    sottotitolo, 
+    homeCarousel,
+    durata,
+    difficolta,
+    "immagine": immagine.asset->url,
+    contenuto,
+    pointsOfInterest
+  }
+}[count(itinerariTrovati) > 0].itinerariTrovati`
 
   const results = await client.fetch(query, { queryTerm })
 

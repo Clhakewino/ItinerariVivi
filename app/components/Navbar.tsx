@@ -108,7 +108,7 @@ export default function Navbar() {
                     {results.map((trip) => (
                       <Link
                         key={`search-${trip._id}`}
-                        href={`/destinazioni/${trip.slug}`}
+                        href={`/${trip.cityName.toLowerCase()}`}
                         className="group flex items-center gap-4 bg-white p-0 rounded-xl shadow-sm hover:shadow-xl hover:ring-2 hover:ring-rose-500/20 transition-all border border-slate-100"
                       >
                         <div
@@ -116,8 +116,8 @@ export default function Navbar() {
                           style={{ backgroundImage: `url(${trip.immagine})`, backgroundSize: '220%' }}
                         />
                         <div className="overflow-hidden">
-                          <h4 className="font-bold text-slate-800 leading-tight text-2xl truncate capitalize">{trip.slug}</h4>
-                          <p className="text-sm text-slate-500 pt-3 line-clamp-2 leading-snug">{trip.titolo}</p>
+                          <h4 className="font-bold text-slate-800 leading-tight text-2xl truncate capitalize">{trip.cityName}</h4>
+                          <p className="text-sm text-slate-500 pt-3 line-clamp-2 leading-snug">{trip.sottotitolo}</p>
                         </div>
                       </Link>
                     ))}
