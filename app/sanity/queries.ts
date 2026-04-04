@@ -20,7 +20,7 @@ export async function getItinerarioByName(name: string): Promise<City> {
   name,
   sezioneInfoUtili,
   listaItinerari[] {
-    _id,
+    "_id": _key,
     "cityName": ^.name, // Risaliamo al nome della città padre
     sottotitolo,
     homeCarousel,
@@ -38,7 +38,7 @@ export async function getItinerarioByName(name: string): Promise<City> {
 // Se ti servono itinerari di un preciso homeCarousel
 export async function getItinerariWithId(idCarousel: number): Promise<any[]> {
   const query = `*[_type == "city"]{ "itinerari": listaItinerari[$idCarousel in homeCarousel] {
-      _id,
+      "_id": _key,
       "cityName": ^.name,
       sottotitolo, // Assicurati che il campo si chiami 'titolo' nello schema
       homeCarousel,
@@ -65,7 +65,7 @@ export async function searchItinerari(searchTerm: string): Promise<Itinerario[]>
     sottotitolo match $queryTerm || 
     contenuto[].children[].text match $queryTerm
   ] {
-    _id,
+    "_id": _key,
     "cityName": ^.name,
     sottotitolo, 
     homeCarousel,
