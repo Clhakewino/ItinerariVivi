@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Trasformiamo i nomi in segmenti URL validi (slugify)
   const itinerariUrls = cities.flatMap((city: any) => {
-    const citySlug = city.name.toLowerCase()
+    const citySlug = city.slug.current
 
     return {
         url: `${baseUrl}/${citySlug}`,

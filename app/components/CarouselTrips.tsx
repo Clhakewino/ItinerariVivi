@@ -9,6 +9,8 @@ interface CarouselProps {
 
 export default function CarouselTrips({ title, subtitle, itinerari }: CarouselProps) {
 
+console.log('Itinerari ricevuti per il carosello:', itinerari[0].slug); // Debug: verifica i dati ricevuti
+
     return (
         // CAROSELLO
         <section>
@@ -38,7 +40,7 @@ export default function CarouselTrips({ title, subtitle, itinerari }: CarouselPr
                             </div>
                             <h3 className="text-xl font-bold first-letter:uppercase">{trip.cityName} - {trip.sottotitolo}</h3>
                             <Link
-                                href={`/${trip.cityName}`}
+                                href={`/${trip.slug}`}
                                 className="mt-4 block w-full py-2 border border-slate-200 rounded-lg text-sm font-semibold text-center hover:bg-slate-900 hover:text-white transition"
                             >
                                 Vedi Dettagli

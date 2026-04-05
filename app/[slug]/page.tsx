@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation';
-import { getItinerarioByName } from '../sanity/queries';
+import { getItinerarioBySlug } from '../sanity/queries';
 
 import CustomPortableText from '../components/CustomPortableText';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { slug } = await params;
 
-  const city = await getItinerarioByName(slug);
+  const city = await getItinerarioBySlug(slug);
 
   if (!city) {
     notFound();
@@ -29,7 +29,7 @@ export default async function CityPage({ params }: { params: { slug: string } })
 
   const { slug } = await params; // ci vuole await
 
-  const city = await getItinerarioByName(slug);
+  const city = await getItinerarioBySlug(slug);
 
   if (!city) {
     notFound();
@@ -42,7 +42,7 @@ export default async function CityPage({ params }: { params: { slug: string } })
     "name": `Itinerario a ${city.name}`,
     "description": `Scopri itinerari a ${city.name}, dai luoghi culturali ai posti più nascosti.`,
     "image": city.listaItinerari[0].immagine,
-    "url": `https://itinerari-vivi.vercel.app/${city.name}`,
+    "url": `https://itinerari-vivi.vercel.app/${city.slug}`,
     "itinerary": {
       "@type": "ItemList",
       "itemListElement": city.listaItinerari[0]?.pointsOfInterest?.map((poi, index) => ({

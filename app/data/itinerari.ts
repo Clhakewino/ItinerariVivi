@@ -6,6 +6,7 @@ export interface PointOfInterest {
 
 export interface Itinerario {
   _id: string;
+  slug: string; // Aggiunto per facilitare i link alle città  
   cityName: string; // Aggiunto per facilitare i link alle città
   sottotitolo: string;
   homeCarousel: number[];

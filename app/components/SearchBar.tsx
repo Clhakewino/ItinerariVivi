@@ -44,7 +44,7 @@ export default function SearchBar() {
         <div className="absolute w-full mt-2 bg-white rounded-xl shadow-2xl border border-slate-100 z-50 overflow-hidden">
           {results.length > 0 ? (
             results.map((trip) => (
-              <Link key={trip._id} href={`/${trip.cityName}`} className="flex items-center gap-4 p-1 hover:bg-slate-50 transition">
+              <Link key={trip._id} href={`/${trip.slug}`} className="flex items-center gap-4 p-1 hover:bg-slate-50 transition">
                 <img src={trip.immagine} alt={trip.sottotitolo} className="w-16 h-16 rounded-md object-cover" />
                 <div>
                   <p className="font-bold text-slate-800 capitalize">{trip.cityName}</p>
