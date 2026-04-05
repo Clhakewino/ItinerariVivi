@@ -50,7 +50,7 @@ export async function getItinerariWithId(idCarousel: number): Promise<any[]> {
     }
   }.itinerari`;
 
-  const results = await client.fetch(query, { idCarousel });
+  const results = await client.fetch(query, { idCarousel }, { next: { revalidate: 60 } });
 
   return results ? results.flat().filter(Boolean) : [];
 }
