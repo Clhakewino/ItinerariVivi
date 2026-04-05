@@ -9,8 +9,6 @@ interface CarouselProps {
 
 export default function CarouselTrips({ title, subtitle, itinerari }: CarouselProps) {
 
-console.log('Itinerari ricevuti per il carosello:', itinerari[0].slug); // Debug: verifica i dati ricevuti
-
     return (
         // CAROSELLO
         <section>

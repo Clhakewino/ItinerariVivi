@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
-import { getItinerarioBySlug } from '../sanity/queries';
+import { getItinerarioBySlug, searchItinerari } from '../sanity/queries';
 
 import CustomPortableText from '../components/CustomPortableText';
+import CarouselTrips from '../components/CarouselTrips';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { slug } = await params;
@@ -30,6 +31,9 @@ export default async function CityPage({ params }: { params: { slug: string } })
   const { slug } = await params; // ci vuole await
 
   const city = await getItinerarioBySlug(slug);
+
+  const itinerariCorrelati = await searchItinerari(city.name) // Cerca itinerari correlati usando il nome della città7
+  const itinerariCorrelatiFiltrati = itinerariCorrelati.filter((it: any) => it._id !== city.listaItinerari[0]._id); // Escludi l'itinerario corrente
 
   if (!city) {
     notFound();
@@ -81,7 +85,7 @@ export default async function CityPage({ params }: { params: { slug: string } })
         {/* CONTENUTO - Qui puoi mappare le descrizioni che avevi nei file HTML */}
         <main className="max-w-7xl mx-auto px-2 -mt-14 relative z-10 pb-20">
           <div className="bg-white rounded-2xl shadow-2xl py-8 px-4 md:p-12">
-            
+
             <header className="mb-8">
               <div className="flex gap-4 text-sm font-medium text-rose-500 uppercase tracking-wider mb-6">
                 <span>⏱️ {city.listaItinerari[0].durata}</span>
@@ -107,6 +111,16 @@ export default async function CityPage({ params }: { params: { slug: string } })
                 </div>
               </div>
             )}
+
+            <div className="mt-12">
+              {itinerariCorrelatiFiltrati.length > 0 && (
+                <CarouselTrips
+                  title="Itinerari correlati"
+                  subtitle=''
+                  itinerari={itinerariCorrelatiFiltrati}
+                />
+              )}
+            </div>
           </div>
         </main>
       </div>
