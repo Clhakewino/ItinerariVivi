@@ -4,6 +4,15 @@ import { getItinerarioBySlug, searchItinerari } from '../sanity/queries';
 import CustomPortableText from '../components/CustomPortableText';
 import CarouselTrips from '../components/CarouselTrips';
 
+import { createImageUrlBuilder } from '@sanity/image-url'
+import { client } from '../sanity/sanityClient'
+
+const builder = createImageUrlBuilder(client)
+
+function urlFor(source: any) {
+  return builder.image(source)
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const { slug } = await params;
 
@@ -22,10 +31,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       images: [
         {
           // Usa l'URL fornito da Sanity. Next.js farà il resto se metadataBase è nel layout.
-          url: city.listaItinerari[0].immagine,
-          // Aggiungere width e height aiuta molto WhatsApp
-          width: 1200,
-          height: 630, 
+          url: urlFor(city.listaItinerari[0].immagine)
+            .width(1200)
+            .height(630)
+            .fit('crop')
+            .url(),
           alt: `Immagine rappresentativa dell'itinerario a ${city.name}`,
           type: 'image/jpeg',
         }
