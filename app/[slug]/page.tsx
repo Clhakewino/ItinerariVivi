@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
           width: 1200,
           height: 630, 
           alt: `Immagine rappresentativa dell'itinerario a ${city.name}`,
+          type: 'image/jpeg',
         }
       ],
       type: 'article',
