@@ -17,10 +17,21 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${city.name}`,
     description: `Itinerario di ${city.listaItinerari[0].durata} a ${city.name}`,
     openGraph: {
-      title: `Itinerario ${city.name}: Cosa vedere e come muoversi`,
+      title: `Itinerario a ${city.name}: Cosa vedere e come muoversi`,
       description: `Il miglior percorso per visitare ${city.name} in ${city.listaItinerari[0].durata}.`,
-      images: [city.listaItinerari[0].immagine],
+      images: [
+        {
+          // Usa l'URL fornito da Sanity. Next.js farà il resto se metadataBase è nel layout.
+          url: city.listaItinerari[0].immagine,
+          // Aggiungere width e height aiuta molto WhatsApp
+          width: 1200,
+          height: 630, 
+          alt: `Immagine rappresentativa dell'itinerario a ${city.name}`,
+        }
+      ],
       type: 'article',
+      url: `https://itinerari-vivi.vercel.app/${slug}`,
+      siteName: "ItinerariVivi",
     },
     // Le icone sono già nel layout, non serve ripeterle qui a meno che non siano diverse
   };
