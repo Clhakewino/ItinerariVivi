@@ -14,15 +14,15 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: `${city.name.toUpperCase()}`,
-    description: `Itinerario ${city.name.charAt(0).toUpperCase()}${city.name.slice(1).toLowerCase()}`,
+    title: `${city.name}`,
+    description: `Itinerario di ${city.listaItinerari[0].durata} a ${city.name}`,
     openGraph: {
+      title: `Itinerario ${city.name}: Cosa vedere e come muoversi`,
+      description: `Il miglior percorso per visitare ${city.name} in ${city.listaItinerari[0].durata}.`,
       images: [city.listaItinerari[0].immagine],
+      type: 'article',
     },
-    icons: {
-      icon: "/favicon.ico", // Assicurati che il file sia in public/
-      apple: "/favicon.png", // Opzionale, per dispositivi Apple
-    },
+    // Le icone sono già nel layout, non serve ripeterle qui a meno che non siano diverse
   };
 }
 
