@@ -54,7 +54,7 @@ export default async function CityPage({ params }: { params: { slug: string } })
 
   const city = await getItinerarioBySlug(slug);
 
-  const itinerariCorrelati = await searchItinerari(city.name) // Cerca itinerari correlati usando il nome della città7
+  const itinerariCorrelati = await searchItinerari(city.name) // Cerca itinerari correlati usando il nome della città
   const itinerariCorrelatiFiltrati = itinerariCorrelati.filter((it: any) => it._id !== city.listaItinerari[0]._id); // Escludi l'itinerario corrente
 
   if (!city) {
