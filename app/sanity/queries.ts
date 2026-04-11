@@ -7,8 +7,7 @@ import { City } from "../data/city"
 export async function getItinerari(): Promise<Itinerario[]> {
   const query = `*[_type == "city"]{
     name,
-    listaItinerari,
-    sezioneInfoUtili
+    listaItinerari
   }`
 
   return await client.fetch(query)
@@ -19,7 +18,6 @@ export async function getItinerarioBySlug(slug: string): Promise<City> {
   const query = `*[_type == "city" && slug.current == $slug][0]{
   name,
   slug,
-  sezioneInfoUtili,
   listaItinerari[] {
     "_id": _key,
     "slug": ^.slug.current,
